@@ -33,26 +33,18 @@ class CampaignControllerTest {
 
     @Test
     void testGetSummaryCampaignNotFound() {
-        // Given
         UUID nonExistentCampaignId = UUID.randomUUID();
 
-        // When
         ResponseEntity<CampaignSummary> response = campaignController.getSummary(nonExistentCampaignId);
 
-        // Then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(response.getBody()).isNull();
     }
 
     @Test
     void testGetSummaryThrowsException() {
-        // Simulate exception handling by passing an invalid UUID or mocking service if needed.
-        // For now, we will test how the controller handles invalid input in a real setup.
+        UUID invalidCampaignId = null;
 
-        // Given
-        UUID invalidCampaignId = null; // Simulate passing a null campaign ID which may cause an error
-
-        // When
         try {
             campaignController.getSummary(invalidCampaignId);
         } catch (Exception e) {

@@ -47,19 +47,25 @@ public class CampaingServiceTest {
 
         // Verify option occurrences
         List<OptionSummary> optionSummaries = choiceSummary.getOptionSummaries();
-        assertThat(optionSummaries).hasSize(2);
+        assertThat(optionSummaries).hasSize(3);
 
         OptionSummary option1 = optionSummaries.stream()
                 .filter(opt -> opt.getText().equals("Option 1"))
                 .findFirst().orElse(null);
         assertThat(option1).isNotNull();
-        assertThat(option1.getOccurrences()).isEqualTo(3);
+        assertThat(option1.getOccurrences()).isEqualTo(1);
 
         OptionSummary option2 = optionSummaries.stream()
                 .filter(opt -> opt.getText().equals("Option 2"))
                 .findFirst().orElse(null);
         assertThat(option2).isNotNull();
-        assertThat(option2.getOccurrences()).isEqualTo(2);
+        assertThat(option2.getOccurrences()).isEqualTo(3);
+
+        OptionSummary option4 = optionSummaries.stream()
+                .filter(opt -> opt.getText().equals("Option 4"))
+                .findFirst().orElse(null);
+        assertThat(option4).isNotNull();
+        assertThat(option4.getOccurrences()).isEqualTo(2);
     }
 
     @Test

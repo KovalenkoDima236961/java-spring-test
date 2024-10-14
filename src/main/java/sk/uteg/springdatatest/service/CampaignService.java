@@ -2,6 +2,7 @@ package sk.uteg.springdatatest.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import sk.uteg.springdatatest.api.model.CampaignSummary;
 import sk.uteg.springdatatest.api.model.OptionSummary;
 import sk.uteg.springdatatest.api.model.QuestionSummary;
@@ -30,10 +31,11 @@ public class CampaignService {
         this.answerRepository = answerRepository;
     }
 
+    @Transactional
     public CampaignSummary getSummary(UUID uuid) {
         Optional<Campaign> campaign = campaignRepository.findById(uuid);
         if(campaign.isEmpty()) {
-            return null;
+            throw new RuntimeException("Campaign Summary with this id was not found");
         } else {
             Campaign foundCampaign = campaign.get();
             CampaignSummary campaignSummary = new CampaignSummary();
